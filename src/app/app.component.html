@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" [ngClass]="formStatus">
   <header>Registration Form</header>
 
   <form class="form" [formGroup]="reactiveForm" (ngSubmit)="onFormSubmitted()">
@@ -69,7 +69,8 @@
         >
           *User Name is a required field
         </small>
-        <button class="btn-gen-username" type="button">
+        <button class="btn-gen-username" type="button" (click)="generateUsername()" [disabled]="!(reactiveForm.get('firstname').value 
+        && reactiveForm.get('lastname').value && reactiveForm.get('dob').value)">
           Create a Username
         </button>
       </div>
@@ -162,9 +163,8 @@
           let control of reactiveForm.get('skills')['controls'];
           let i = index
         "
-        [formArrayName]="i"
       >
-        <input type="text" placeholder="Add Skill..." formControlName="skill"/>
+        <input type="text" placeholder="Add Skill..." [formControlName]="i"/>
         <button type="button" class="btn-add-delete" (click)="deleteSkill(i)">
           Delete
         </button>
@@ -220,25 +220,25 @@
   </form>
 </section>
 
-<!-- <section class="user-detail-container">
+<section class="user-detail-container">
   <div class="user-details-container">
     <div class="user-avatar">
-      <p>JS</p>
+      <p>{{formdata.firstname?.slice(0, 1)?.toUpperCase()}} {{formdata.lastname?.slice(0, 1)}}</p>
     </div>
     <div class="user-details">
       <div class="user-name">
-        <h2>John Smith</h2>
+        <h2> {{formdata.firstname}} {{formdata.lastname}}</h2>
       </div>
-      <p><b>Email:</b> johnsmith&#64;gmail.com</p>
-      <p><b>Username:</b> johnsmith86 </p>
-      <p><b>Date of birth:</b> July 21, 1989</p>
+      <p><b>Email:</b> {{formdata.email}}</p>
+      <p><b>Username:</b> {{formdata.username}} </p>
+      <p><b>Date of birth:</b> {{formdata.dob}}</p>
       <div class="user-name">
         <h3>Address</h3>
       </div>
-      <span>India</span>.
-      <span> New Delhi</span>.
-      <span> NCR</span>.
-      <span> 234565</span>
+      <span>{{formdata.address?.country}}</span>.
+      <span> {{formdata.address?.city}}</span>.
+      <span> {{formdata.address?.region}}</span>.
+      <span> {{formdata.address?.postal}}</span>
     </div>
   </div>
-</section> -->
+</section>

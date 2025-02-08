@@ -42,11 +42,15 @@ export class AppComponent implements OnInit{
       ]),
       experience: new FormArray([
         
-      ])
+      ]),
+
     })
+    // this.reactiveForm.valueChanges.subscribe((value) => {
+    //   console.log(value);
+    // })
 
     this.reactiveForm.statusChanges.subscribe((status) => {
-      console.log(status)
+      // console.log(status)
       this.formStatus = status;
     });
 
@@ -105,7 +109,7 @@ export class AppComponent implements OnInit{
     frmArray.removeAt(index);
   }
 
-  GenerateUsername(){
+  generateUsername(){
     let username = '';
     const fName: string= this.reactiveForm.get('firstname').value;
     const lName: string= this.reactiveForm.get('lastname').value;
@@ -126,31 +130,10 @@ export class AppComponent implements OnInit{
     }
 
     let datetime = new Date(dob);
-    username += datetime.getFullYear();
+    username += datetime.getDate();
 
     username = username.toLowerCase();
 
-    //console.log(username);
-
-    // this.reactiveForm.setValue({
-    //   firstname: this.reactiveForm.get('firstname').value,
-    //   lastname: this.reactiveForm.get('lastname').value,
-    //   email: this.reactiveForm.get('email').value,
-    //   username: username,
-    //   dob: this.reactiveForm.get('dob').value,
-    //   gender: this.reactiveForm.get('gender').value,
-    //   address: {
-    //     street: this.reactiveForm.get('address.street').value,
-    //     country: this.reactiveForm.get('address.country').value,
-    //     city: this.reactiveForm.get('address.city').value,
-    //     region: this.reactiveForm.get('address.region').value,
-    //     postal: this.reactiveForm.get('address.postal').value
-    //   },
-    //   skills: this.reactiveForm.get('skills').value,
-    //   experience: this.reactiveForm.get('experience').value
-    // })
-
-    //this.reactiveForm.get('username').setValue(username);
 
     this.reactiveForm.patchValue({
       username: username,
